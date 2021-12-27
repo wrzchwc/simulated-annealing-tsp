@@ -22,6 +22,12 @@ public class Main {
         return input.nextLine().equals("1");
     }
 
+    private static String getFilepath(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter path to file containing instance: ");
+        return input.nextLine();
+    }
+
     private static void demonstrate(){}
 
     public static void main(String[] args) {
