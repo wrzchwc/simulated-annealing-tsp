@@ -3,17 +3,14 @@ package matrix;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class AdjacencyMatrix {
     private int[][] matrix;
     private int size;
-    private final boolean representsFullGraph;
 
-    public AdjacencyMatrix(String filepath, boolean representsFullGraph) {
-        this.representsFullGraph = representsFullGraph;
+    public AdjacencyMatrix(String filepath) {
         try {
             File file = new File(filepath);
             Scanner scanner = new Scanner(file);
@@ -62,10 +59,4 @@ public class AdjacencyMatrix {
         }
     }
 
-    public int getNumberOfNeighbours(int vertexID) {
-        if (representsFullGraph) {
-            return size - 1;
-        }
-        return (int) Arrays.stream(matrix[vertexID]).filter(m -> m != 0).count();
-    }
 }

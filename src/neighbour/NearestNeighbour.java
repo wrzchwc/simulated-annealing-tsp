@@ -5,22 +5,25 @@ import matrix.AdjacencyMatrix;
 import java.util.*;
 
 public class NearestNeighbour {
-    public static int get(AdjacencyMatrix matrix) {
+    public static ValuePair<List<Integer>, Integer> get(AdjacencyMatrix matrix) {
         int size = matrix.getSize();
         int parameter = 0;
         List<Integer> unvisited = getIndexes(size);
+        List<Integer> solution = new ArrayList<>(List.of(0));
         int u = unvisited.get(0);
         unvisited.remove(0);
         int v = 0;
         while (!unvisited.isEmpty()) {
             ValuePair<Integer, Integer> indexOfNearest = getIndexOfNearest(matrix, unvisited, v);
             v = indexOfNearest.getKey();
+            solution.add(v);
             parameter += indexOfNearest.getValue();
             unvisited.remove((Integer) v);
         }
         parameter += matrix.getData(v, 0);
+        solution.add(0);
 
-        return parameter;
+        return new ValuePair<>(solution, parameter);
     }
 
     private static List<Integer> getIndexes(int size) {
