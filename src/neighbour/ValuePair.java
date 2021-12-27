@@ -1,19 +1,19 @@
 package neighbour;
 
-public class ValuePair {
-    private final int key;
-    private final int value;
+public class ValuePair<K, V> {
+    private final K key;
+    private final V value;
 
-    public ValuePair(int key, int value) {
+    public ValuePair(K key, V value) {
         this.key = key;
         this.value = value;
     }
 
-    public int getKey() {
+    public K getKey() {
         return key;
     }
 
-    public int getValue() {
+    public V getValue() {
         return value;
     }
 }

@@ -13,7 +13,7 @@ public class NearestNeighbour {
         unvisited.remove(0);
         int v = 0;
         while (!unvisited.isEmpty()) {
-            ValuePair indexOfNearest = getIndexOfNearest(matrix, unvisited, v);
+            ValuePair<Integer, Integer> indexOfNearest = getIndexOfNearest(matrix, unvisited, v);
             v = indexOfNearest.getKey();
             parameter += indexOfNearest.getValue();
             unvisited.remove((Integer) v);
@@ -31,7 +31,7 @@ public class NearestNeighbour {
         return tmp;
     }
 
-    private static ValuePair getIndexOfNearest(AdjacencyMatrix matrix, List<Integer> unvisited, int row) {
+    private static ValuePair<Integer, Integer> getIndexOfNearest(AdjacencyMatrix matrix, List<Integer> unvisited, int row) {
         int min = Integer.MAX_VALUE;
         int index = 0;
         for (Integer u : unvisited) {
@@ -41,6 +41,6 @@ public class NearestNeighbour {
                 index = u;
             }
         }
-        return new ValuePair(index, min);
+        return new ValuePair<>(index, min);
     }
 }
