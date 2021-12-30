@@ -5,15 +5,34 @@ import neighbour.NearestNeighbour;
 import neighbour.ValuePair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+
 public class SimulatedAnnealing {
-    //todo: different methods for different variants or special args
     public static int tsp(AdjacencyMatrix matrix) {
         ValuePair<List<Integer>, Integer> initialPair = NearestNeighbour.get(matrix);
-        int temperature = initialPair.getValue();
         List<Integer> solution = initialPair.getKey();
-
+        double temperature = 2 * initialPair.getValue();
+        int size = matrix.getSize();
+        for (int i = 1; i <= size; i++) {
+            for (int j = 1; j < size; j++) {
+                if (i == j) {
+                    continue;
+                }
+                List<Integer> permutation = Neighbourhood.swap(solution, i, j);
+                double difference = getCost(matrix, permutation) - getCost(matrix, solution);
+                double a = Math.random();
+                double b = Math.pow(Math.E, -difference / temperature);
+                if (difference < 0) {
+                    solution = permutation;
+                } else if (a < b) {
+                    solution = permutation;
+                }
+            }
+            temperature = CoolingSchedule.geometric(temperature, 0.99, i);
+        }
         return getCost(matrix, solution);
     }
 
@@ -24,5 +43,6 @@ public class SimulatedAnnealing {
         }
         return cost;
     }
+
 
 }
