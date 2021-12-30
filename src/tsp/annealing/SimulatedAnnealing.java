@@ -12,22 +12,17 @@ public class SimulatedAnnealing {
         double temperature = 2 * getCost(matrix, solution);
 
         int size = matrix.getSize();
-        for (int i = 1; i <= size; i++) {
-            for (int j = 1; j < size; j++) {
-                if (i == j) {
-                    continue;
-                }
-                List<Integer> permutation = Neighbourhood.swap(solution, i, j);
+        for (int i = 0; temperature > 0.001; i++) {
+            for (int j = 0; j < size; j++) {
+                List<Integer> permutation = Neighbourhood.swap(solution);
                 double difference = getCost(matrix, permutation) - getCost(matrix, solution);
-                double a = Math.random();
-                double b = Math.pow(Math.E, -difference / temperature);
                 if (difference < 0) {
                     solution = permutation;
-                } else if (a < b) {
+                } else if (Math.random() < Math.pow(Math.E, -difference / temperature)) {
                     solution = permutation;
                 }
             }
-            temperature = CoolingSchedule.geometric(temperature, 0.99, i);
+            temperature = CoolingSchedule.geometric(temperature, 0.999, i);
         }
         return getCost(matrix, solution);
     }
@@ -39,6 +34,4 @@ public class SimulatedAnnealing {
         }
         return cost;
     }
-
-
 }
