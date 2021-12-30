@@ -2,16 +2,15 @@ package tsp.annealing;
 
 import graph.AdjacencyMatrix;
 import tsp.neighbour.NearestNeighbour;
-import tsp.neighbour.ValuePair;
 
 import java.util.List;
 
 
 public class SimulatedAnnealing {
     public static int tsp(AdjacencyMatrix matrix) {
-        ValuePair<List<Integer>, Integer> initialPair = NearestNeighbour.get(matrix);
-        List<Integer> solution = initialPair.getKey();
-        double temperature = 2 * initialPair.getValue();
+        List<Integer> solution = NearestNeighbour.get(matrix);
+        double temperature = 2 * getCost(matrix, solution);
+
         int size = matrix.getSize();
         for (int i = 1; i <= size; i++) {
             for (int j = 1; j < size; j++) {
