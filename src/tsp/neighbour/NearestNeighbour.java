@@ -1,6 +1,6 @@
-package neighbour;
+package tsp.neighbour;
 
-import matrix.AdjacencyMatrix;
+import graph.AdjacencyMatrix;
 
 import java.util.*;
 

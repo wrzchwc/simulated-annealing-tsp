@@ -1,4 +1,4 @@
-package matrix;
+package graph;
 
 import java.io.File;
 import java.io.FileNotFoundException;

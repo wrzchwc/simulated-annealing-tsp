@@ -1,4 +1,4 @@
-package neighbour;
+package tsp.neighbour;
 
 public class ValuePair<K, V> {
     private final K key;

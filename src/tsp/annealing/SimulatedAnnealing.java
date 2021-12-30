@@ -1,12 +1,9 @@
-package tsp;
+package tsp.annealing;
 
-import matrix.AdjacencyMatrix;
-import neighbour.NearestNeighbour;
-import neighbour.ValuePair;
+import graph.AdjacencyMatrix;
+import tsp.neighbour.NearestNeighbour;
+import tsp.neighbour.ValuePair;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 
