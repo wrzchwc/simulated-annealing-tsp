@@ -18,7 +18,7 @@ public class SimulatedAnnealing {
         long initialTime = System.currentTimeMillis();
         for (int i = 0; System.currentTimeMillis() - initialTime < timeLimit; i++) {
             for (int j = 0; j < size / 2; j++) {
-                List<Integer> permutation = Neighbourhood.swap(solution);
+                List<Integer> permutation = Neighbourhood.insert(solution);
                 double difference = getCost(matrix, permutation) - getCost(matrix, solution);
                 if (difference < 0) {
                     System.out.println(getCost(matrix, permutation));

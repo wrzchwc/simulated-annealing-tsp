@@ -6,18 +6,34 @@ import java.util.List;
 
 public class Neighbourhood {
     static List<Integer> swap(List<Integer> list) {
-        List<Integer> swappedList = new ArrayList<>(list);
-        int upperBound = list.size() - 3;
-        int firstIndex = getRandomIndex(upperBound);
-        int secondIndex = getRandomIndex(upperBound);
+        List<Integer> permutation = new ArrayList<>(list);
+        int upperBound = getUpperBound(list);
+        int firstIndex = getRandomIndex(upperBound, 1);
+        int secondIndex = getRandomIndex(upperBound, 1);
         while (firstIndex == secondIndex) {
-            secondIndex = getRandomIndex(upperBound);
+            secondIndex = getRandomIndex(upperBound, 1);
         }
-        Collections.swap(swappedList, firstIndex, secondIndex);
-        return swappedList;
+        Collections.swap(permutation, firstIndex, secondIndex);
+        return permutation;
     }
 
-    private static int getRandomIndex(int upperBound) {
-        return (int) (Math.random() * upperBound + 1);
+    private static int getRandomIndex(int upperBound, int lowerBound) {
+        return (int) (Math.random() * upperBound + lowerBound);
+    }
+
+    private static int getUpperBound(List<Integer> list) {
+        return list.size() - 3;
+    }
+
+    static List<Integer> insert(List<Integer> list) {
+        List<Integer> permutation = new ArrayList<>(list);
+        int upperBound = getUpperBound(list);
+        int firstIndex = getRandomIndex(upperBound, 2);
+        int secondIndex = getRandomIndex(upperBound, 2);
+        while (firstIndex == secondIndex) {
+            secondIndex = getRandomIndex(upperBound, 2);
+        }
+        permutation.add(firstIndex, permutation.remove(secondIndex));
+        return permutation;
     }
 }
