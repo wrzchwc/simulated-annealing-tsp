@@ -20,7 +20,7 @@ public class AdjacencyMatrix {
             List<String[]> lines = new ArrayList<>();
 
             for (int i = 0; i < size; i++) {
-                lines.add(scanner.nextLine().split(" +"));
+                lines.add(scanner.nextLine().trim().split(" +"));
             }
 
             scanner.close();
