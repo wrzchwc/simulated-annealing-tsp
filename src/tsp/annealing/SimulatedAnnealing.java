@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class SimulatedAnnealing {
-    public static int tsp(AdjacencyMatrix matrix) {
+    public static int tsp(AdjacencyMatrix matrix, boolean isSwap, boolean isGeometric) {
         int size = matrix.getSize();
         long timeLimit = getTimeLimit(size);
 
@@ -18,7 +18,7 @@ public class SimulatedAnnealing {
         long initialTime = System.currentTimeMillis();
         for (int i = 0; System.currentTimeMillis() - initialTime < timeLimit; i++) {
             for (int j = 0; j < size / 2; j++) {
-                List<Integer> permutation = Neighbourhood.insert(solution);
+                List<Integer> permutation = Neighbourhood.get(solution, isSwap);
                 double difference = getCost(matrix, permutation) - getCost(matrix, solution);
                 if (difference < 0) {
                     System.out.println(getCost(matrix, permutation));
@@ -27,7 +27,7 @@ public class SimulatedAnnealing {
                     solution = permutation;
                 }
             }
-            currentTemperature = CoolingSchedule.geometric(initialTemperature, i);
+            currentTemperature = CoolingSchedule.get(initialTemperature, i, isGeometric);
         }
         return getCost(matrix, solution);
     }

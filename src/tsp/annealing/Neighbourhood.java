@@ -5,7 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Neighbourhood {
-    static List<Integer> swap(List<Integer> list) {
+    static List<Integer> get(List<Integer> list, boolean isSwap) {
+        if (isSwap) {
+            return swap(list);
+        }
+        return insert(list);
+    }
+
+    private static List<Integer> swap(List<Integer> list) {
         List<Integer> permutation = new ArrayList<>(list);
         int upperBound = getUpperBound(list);
         int firstIndex = getRandomIndex(upperBound, 1);
@@ -25,7 +32,7 @@ public class Neighbourhood {
         return list.size() - 3;
     }
 
-    static List<Integer> insert(List<Integer> list) {
+    private static List<Integer> insert(List<Integer> list) {
         List<Integer> permutation = new ArrayList<>(list);
         int upperBound = getUpperBound(list);
         int firstIndex = getRandomIndex(upperBound, 2);
