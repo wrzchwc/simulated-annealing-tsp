@@ -1,7 +1,7 @@
 package tsp.annealing;
 
 import graph.AdjacencyMatrix;
-import tsp.neighbour.NearestNeighbour;
+import tsp.NearestNeighbour;
 
 import java.util.*;
 
