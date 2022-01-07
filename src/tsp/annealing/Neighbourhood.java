@@ -24,7 +24,7 @@ public class Neighbourhood {
         return permutation;
     }
 
-    private static int getRandomIndex(int upperBound, int lowerBound) {
+    static int getRandomIndex(int upperBound, int lowerBound) {
         return (int) (Math.random() * upperBound + lowerBound);
     }
 

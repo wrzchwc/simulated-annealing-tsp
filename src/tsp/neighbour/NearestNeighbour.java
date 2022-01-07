@@ -20,7 +20,7 @@ public class NearestNeighbour {
         return solution;
     }
 
-    private static List<Integer> getIndexes(int size) {
+    public static List<Integer> getIndexes(int size) {
         List<Integer> tmp = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             tmp.add(i);
