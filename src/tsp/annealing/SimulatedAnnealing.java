@@ -7,12 +7,21 @@ import java.util.*;
 
 
 public class SimulatedAnnealing {
-    public static int tspGreedy(AdjacencyMatrix matrix, boolean isSwap, boolean isGeometric) {
+    public static int tspGreedy(AdjacencyMatrix matrix, boolean isSwap, boolean isGeometric, boolean isRandom) {
         int size = matrix.getSize();
         long timeLimit = getTimeLimit(size);
 
-        List<Integer> solution = NearestNeighbour.get(matrix);
-        double initialTemperature = 2 * getCost(matrix, solution);
+        List<Integer> solution;
+        double initialTemperature;
+
+        if (isRandom){
+            solution=getRandomPath(size);
+            initialTemperature = 1.5 * getCost(matrix, solution);
+        } else {
+            solution = NearestNeighbour.get(matrix);
+            initialTemperature = 2 * getCost(matrix, solution);
+        }
+
         double currentTemperature = initialTemperature;
 
         long initialTime = System.currentTimeMillis();
@@ -32,12 +41,21 @@ public class SimulatedAnnealing {
         return getCost(matrix, solution);
     }
 
-    public static int tspSteepest(AdjacencyMatrix matrix, boolean isSwap, boolean isGeometric) {
+    public static int tspSteepest(AdjacencyMatrix matrix, boolean isSwap, boolean isGeometric, boolean isRandom) {
         int size = matrix.getSize();
         long timeLimit = getTimeLimit(size);
 
-        List<Integer> solution = getRandomPath(size);
-        double initialTemperature = 2 * getCost(matrix, solution);
+        List<Integer> solution;
+        double initialTemperature;
+
+        if (isRandom){
+            solution=getRandomPath(size);
+            initialTemperature=1.5*getCost(matrix, solution);
+        } else {
+            solution = NearestNeighbour.get(matrix);
+            initialTemperature = 2* getCost(matrix, solution);
+        }
+
         double currentTemperature = initialTemperature;
 
         long initialTime = System.currentTimeMillis();
