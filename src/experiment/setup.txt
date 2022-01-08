@@ -1,0 +1,14 @@
+instances/tsp_14.txt 282
+instances/gr21.txt 2707
+instances/ftv33.atsp 1286
+instances/p43.atsp 5620
+instances/eil51.tsp 426
+instances/st70.tsp 675
+instances/gr96.tsp 55209
+instances/kroA100.tsp 21282
+instances/gr120.tsp 6942
+instances/kroB150.tsp 26130
+instances/pr152.tsp 73682
+instances/ftv170.atsp 2755
+instances/kroB200.tsp 29437
+instances/rbg323.atsp 1326
