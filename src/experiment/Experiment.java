@@ -10,17 +10,19 @@ import java.util.*;
 public class Experiment {
     private static final String SETUP = "src/experiment/setup.txt";
     private static final String RESULTS = "results.txt";
+    private static int solution;
+    private static AdjacencyMatrix matrix;
 
     public static void run() {
         Map<String, Integer> setup = getSetup();
         for (String instance : setup.keySet()) {
-            int solution = setup.get(instance);
-            AdjacencyMatrix matrix = new AdjacencyMatrix(instance);
+            solution = setup.get(instance);
+            matrix = new AdjacencyMatrix(instance);
             List<Map<Integer, Integer>> results = new ArrayList<>();
-            results.add(testCoolingSchedule(matrix, solution));
-            results.add(testNeighbourhoodSearch(matrix, solution));
-            results.add(testSolutionChoice(matrix, solution));
-            results.add(testInitialSolutionAndTemperature(matrix, solution));
+            results.add(testCoolingSchedule());
+            results.add(testNeighbourhoodSearch());
+            results.add(testSolutionChoice());
+            results.add(testInitialSolutionAndTemperature());
         }
 
     }
@@ -44,7 +46,7 @@ public class Experiment {
     private static void saveResults() {
     }
 
-    private static Map<Integer, Integer> testCoolingSchedule(AdjacencyMatrix matrix, int solution) {
+    private static Map<Integer, Integer> testCoolingSchedule() {
         int sumGeometric = 0;
         int sumLinear = 0;
 
@@ -56,10 +58,10 @@ public class Experiment {
             }
         }
 
-        return Map.of(getError(sumGeometric, solution), getError(sumLinear, solution));
+        return Map.of(getError(sumGeometric), getError(sumLinear));
     }
 
-    private static Map<Integer, Integer> testNeighbourhoodSearch(AdjacencyMatrix matrix, int solution) {
+    private static Map<Integer, Integer> testNeighbourhoodSearch() {
         int sumSwap = 0;
         int sumInsert = 0;
 
@@ -70,10 +72,10 @@ public class Experiment {
                 sumInsert += SimulatedAnnealing.tspSteepest(matrix, false, true, false);
             }
         }
-        return Map.of(getError(sumSwap, solution), getError(sumInsert, solution));
+        return Map.of(getError(sumSwap), getError(sumInsert));
     }
 
-    private static Map<Integer, Integer> testSolutionChoice(AdjacencyMatrix matrix, int solution) {
+    private static Map<Integer, Integer> testSolutionChoice() {
         int sumGreedy = 0;
         int sumSteepest = 0;
 
@@ -84,10 +86,10 @@ public class Experiment {
                 sumSteepest += SimulatedAnnealing.tspSteepest(matrix, false, true, false);
             }
         }
-        return Map.of(getError(sumGreedy, solution), getError(sumSteepest, solution));
+        return Map.of(getError(sumGreedy), getError(sumSteepest));
     }
 
-    private static Map<Integer, Integer> testInitialSolutionAndTemperature(AdjacencyMatrix matrix, int solution) {
+    private static Map<Integer, Integer> testInitialSolutionAndTemperature() {
         int sumNearestNeighbour = 0;
         int sumRandom = 0;
         for (int i = 0; i < 4; i++) {
@@ -97,10 +99,10 @@ public class Experiment {
                 sumRandom += SimulatedAnnealing.tspSteepest(matrix, false, true, true);
             }
         }
-        return Map.of(getError(sumNearestNeighbour, solution), getError(sumRandom, solution));
+        return Map.of(getError(sumNearestNeighbour), getError(sumRandom));
     }
 
-    private static int getError(int sum, int solution) {
+    private static int getError(int sum) {
         return sum / 2 - solution;
     }
 }
