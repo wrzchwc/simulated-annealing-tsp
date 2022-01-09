@@ -1,3 +1,7 @@
+import experiment.Experiment;
+import graph.AdjacencyMatrix;
+import tsp.annealing.SimulatedAnnealing;
+
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +15,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         System.out.println("0 Quit");
         System.out.println("1 Demonstrate");
-        //todo: System.out.println("2 Execute");
+        System.out.println("2 Execute");
         return input.nextInt();
     }
 
@@ -22,13 +26,16 @@ public class Main {
         return input.nextLine().equals("1");
     }
 
-    private static String getFilepath(){
+    private static String getFilepath() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter path to file containing instance: ");
         return input.nextLine();
     }
 
-    private static void demonstrate(){}
+    private static void demonstrate() {
+        AdjacencyMatrix matrix = new AdjacencyMatrix(getFilepath());
+        System.out.println("Result: " + SimulatedAnnealing.tspSteepest(matrix, false, true, false));
+    }
 
     public static void main(String[] args) {
         printHeader();
@@ -40,16 +47,14 @@ public class Main {
             } else if (mode == 1) {
                 while (true) {
                     if (getAlgorithm()) {
-                        //todo: demonstrate();
+                        demonstrate();
                     } else {
                         break;
                     }
-
                 }
+            } else if (mode == 2) {
+                Experiment.run();
             }
-
         }
-
-
     }
 }

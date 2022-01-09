@@ -15,13 +15,14 @@ public class Experiment {
     public static void run() {
         Map<String, Integer> setup = getSetup();
         for (String instance : setup.keySet()) {
+            System.out.println(instance);
             solution = setup.get(instance);
             matrix = new AdjacencyMatrix(instance);
-            List<Map<Integer, Integer>> results = new ArrayList<>();
-            results.add(testCoolingSchedule());
-            results.add(testNeighbourhoodSearch());
-            results.add(testSolutionChoice());
-            results.add(testInitialSolutionAndTemperature());
+            List<Integer> results = new ArrayList<>();
+            results.addAll(testCoolingSchedule());
+            results.addAll(testNeighbourhoodSearch());
+            results.addAll(testSolutionChoice());
+            results.addAll(testInitialSolutionAndTemperature());
             saveResults(results, instance);
         }
     }
@@ -42,23 +43,22 @@ public class Experiment {
         return setup;
     }
 
-    private static void saveResults(List<Map<Integer, Integer>> list, String instanceName) {
+    private static void saveResults(List<Integer> list, String instanceName) {
+        File file = new File(RESULTS);
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(RESULTS));
-            writer.print(instanceName + " ");
-            for (Map<Integer, Integer> map : list) {
-                Object key = map.keySet().toArray()[0];
-                Object value = map.values().toArray()[0];
-                writer.print(key + " " + value + " ");
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(instanceName + " ");
+            for (Integer l : list) {
+                writer.write(l + " ");
             }
-            writer.println();
+            writer.write("\n");
             writer.close();
         } catch (IOException e) {
             System.out.println("Data save error has occurred!");
         }
     }
 
-    private static Map<Integer, Integer> testCoolingSchedule() {
+    private static List<Integer> testCoolingSchedule() {
         int sumGeometric = 0;
         int sumLinear = 0;
 
@@ -70,10 +70,10 @@ public class Experiment {
             }
         }
 
-        return Map.of(getError(sumGeometric), getError(sumLinear));
+        return List.of(getError(sumGeometric), getError(sumLinear));
     }
 
-    private static Map<Integer, Integer> testNeighbourhoodSearch() {
+    private static List<Integer> testNeighbourhoodSearch() {
         int sumSwap = 0;
         int sumInsert = 0;
 
@@ -84,10 +84,10 @@ public class Experiment {
                 sumInsert += SimulatedAnnealing.tspSteepest(matrix, false, true, false);
             }
         }
-        return Map.of(getError(sumSwap), getError(sumInsert));
+        return List.of(getError(sumSwap), getError(sumInsert));
     }
 
-    private static Map<Integer, Integer> testSolutionChoice() {
+    private static List<Integer> testSolutionChoice() {
         int sumGreedy = 0;
         int sumSteepest = 0;
 
@@ -98,10 +98,10 @@ public class Experiment {
                 sumSteepest += SimulatedAnnealing.tspSteepest(matrix, false, true, false);
             }
         }
-        return Map.of(getError(sumGreedy), getError(sumSteepest));
+        return List.of(getError(sumGreedy), getError(sumSteepest));
     }
 
-    private static Map<Integer, Integer> testInitialSolutionAndTemperature() {
+    private static List<Integer> testInitialSolutionAndTemperature() {
         int sumNearestNeighbour = 0;
         int sumRandom = 0;
         for (int i = 0; i < 4; i++) {
@@ -111,7 +111,7 @@ public class Experiment {
                 sumRandom += SimulatedAnnealing.tspSteepest(matrix, false, true, true);
             }
         }
-        return Map.of(getError(sumNearestNeighbour), getError(sumRandom));
+        return List.of(getError(sumNearestNeighbour), getError(sumRandom));
     }
 
     private static int getError(int sum) {

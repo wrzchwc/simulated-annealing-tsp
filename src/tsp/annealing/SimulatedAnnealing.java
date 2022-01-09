@@ -89,7 +89,7 @@ public class SimulatedAnnealing {
     private static List<Integer> evaluatePermutation(List<Integer> permutation, List<Integer> solution) {
         double difference = getCost(permutation) - getCost(solution);
         if (difference < 0) {
-            System.out.println(getCost(permutation));
+//            System.out.println(getCost(permutation));
             return permutation;
         } else if (Math.random() < Math.pow(Math.E, -difference / currentTemperature)) {
             return permutation;
