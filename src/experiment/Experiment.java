@@ -3,8 +3,7 @@ package experiment;
 import graph.AdjacencyMatrix;
 import tsp.annealing.SimulatedAnnealing;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 public class Experiment {
@@ -23,8 +22,8 @@ public class Experiment {
             results.add(testNeighbourhoodSearch());
             results.add(testSolutionChoice());
             results.add(testInitialSolutionAndTemperature());
+            saveResults(results, instance);
         }
-
     }
 
     private static Map<String, Integer> getSetup() {
@@ -43,7 +42,20 @@ public class Experiment {
         return setup;
     }
 
-    private static void saveResults() {
+    private static void saveResults(List<Map<Integer, Integer>> list, String instanceName) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(RESULTS));
+            writer.print(instanceName + " ");
+            for (Map<Integer, Integer> map : list) {
+                Object key = map.keySet().toArray()[0];
+                Object value = map.values().toArray()[0];
+                writer.print(key + " " + value + " ");
+            }
+            writer.println();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Data save error has occurred!");
+        }
     }
 
     private static Map<Integer, Integer> testCoolingSchedule() {
