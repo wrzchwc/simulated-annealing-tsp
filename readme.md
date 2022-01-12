@@ -18,8 +18,9 @@ the following sources:
 
 The instances are also available in the `instances` directory in this repository.
 
-##Algorithm variants
-###Cooling schedules
+## Algorithm variants
+
+### Cooling schedules
 
 - geometric (Cauchy's)
 - linear
@@ -36,8 +37,8 @@ The instances are also available in the `instances` directory in this repository
 
 ### Ways of initial solution choice
 
-- 200 % of MHC calculated with [Nearest neighbour algorithm](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm)
-- 150 % of the cost of randomly generated [HC](https://en.wikipedia.org/wiki/Hamiltonian_path)
+- 200 % of MHP calculated with [Nearest neighbour algorithm](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm)
+- 150 % of the cost of randomly generated [HP](https://en.wikipedia.org/wiki/Hamiltonian_path)
 
 ## Application modes
 
@@ -96,7 +97,7 @@ where:
 
 - `name` - name of the instance
 - `x` - weight of given edge
-- `solution` - Minimal Hamiltonian cycle (TSP solution) (optional parameter)
+- `solution` - Minimal Hamiltonian path (TSP solution) (optional parameter)
 
 
 
