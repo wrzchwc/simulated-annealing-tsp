@@ -1,4 +1,4 @@
-# Held-Karp Branch & Bound
+# Simulated annealing
 
 ## Context
 
