@@ -49,6 +49,7 @@ public class SimulatedAnnealing {
             solution = evaluatePermutation(permutation, solution);
             currentTemperature = CoolingSchedule.get(initialTemperature, i, isGeometric);
         }
+        System.out.println(solution);
         return getCost(solution);
     }
 
