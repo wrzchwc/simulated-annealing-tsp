@@ -43,7 +43,7 @@ The instances are also available in the `instances` directory in this repository
 ## Application modes
 
 `Demonstrate` - mode designed to present application functioning for the individual instance. User enters 
-the name of file containing matrix and the TSP is being solved and the result.
+the name of file containing matrix and the TSP is being solved and the result is presented on the screen.
 
 `Execute` - mode designed to perform research on the test instances. After providing the name of the
 `configuration file` the application solves TSP for specified instances twice for each variant of the algorithm and 
