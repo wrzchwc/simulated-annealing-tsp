@@ -61,7 +61,7 @@ The configuration file should have .txt extension. The required format presents 
 where:
 
 - `name` - name of the file containing test instance
-- `number` - TSP solution (Minimal Hamiltonian cycle)
+- `number` - TSP solution (Minimal Hamiltonian path)
 
 ### Output file
 
