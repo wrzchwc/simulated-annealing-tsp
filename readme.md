@@ -7,7 +7,7 @@ studies at [Wroclaw University of Science and Technology](https://pwr.edu.pl/en/
 
 ## Introduction
 
-The task aimed to create the implementation algorithm for solving TSP based on
+The task aimed to create the implementation of an algorithm for solving TSP based on
 the [Simulated annealing technique](https://en.wikipedia.org/wiki/Simulated_annealing). 
 
 The process of verifying the accuracy and correctness of created algorithms was based on the test instances come from
